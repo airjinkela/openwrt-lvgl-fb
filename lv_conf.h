@@ -88,7 +88,7 @@
  *====================*/
 
 /** Default display refresh, input device read and animation step period. */
-#define LV_DEF_REFR_PERIOD  33      /**< [ms] */
+#define LV_DEF_REFR_PERIOD  16      /**< [ms] */
 
 /** Default Dots Per Inch. Used to initialize default sizes such as widgets sized, style paddings.
  * (Not so important, you can adjust it to modify default sizes and spaces.) */
@@ -1022,7 +1022,7 @@
 
 /** FFmpeg library for image decoding and playing videos.
  *  Supports all major image formats so do not enable other image decoder with it. */
-#define LV_USE_FFMPEG 0
+#define LV_USE_FFMPEG 1
 #if LV_USE_FFMPEG
     /** Dump input information to stderr */
     #define LV_FFMPEG_DUMP_FORMAT 0

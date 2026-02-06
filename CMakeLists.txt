@@ -50,6 +50,32 @@ if (CONFIG_LV_USE_SDL OR CONFIG_LV_USE_DRAW_SDL)
     list(APPEND PKG_CONFIG_INC ${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 endif()
 
+if (CONFIG_LV_USE_FFMPEG)
+    message("Including ffmpeg support")
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(LIBVAUTIL REQUIRED libavutil)
+    pkg_check_modules(LIBVAFORMAT REQUIRED libavformat)
+    pkg_check_modules(LIBVAFILTER REQUIRED libavfilter)
+    pkg_check_modules(LIBVADEVICE REQUIRED libavdevice)
+    pkg_check_modules(LIBVACODEC REQUIRED libavcodec)
+    pkg_check_modules(LIBSWSCALE REQUIRED libswscale)
+    
+    list(APPEND PKG_CONFIG_LIB ${LIBVAUTIL_LIBRARIES}
+                                ${LIBVAFORMAT_LIBRARIES}
+                                ${LIBVAFILTER_LIBRARIES}
+                                ${LIBVADEVICE_LIBRARIES}
+                                ${LIBVACODEC_LIBRARIES}
+                                ${LIBSWSCALE_LIBRARIES}
+                                )
+    list(APPEND PKG_CONFIG_INC ${LIBVAUTIL_INCLUDE_DIRS}
+                                ${LIBVAFORMAT_INCLUDE_DIRS}
+                                ${LIBVAFILTER_INCLUDE_DIRS}
+                                ${LIBVADEVICE_INCLUDE_DIRS}
+                                ${LIBVACODEC_INCLUDE_DIRS}
+                                ${LIBSWSCALE_INCLUDE_DIRS}
+                                )
+endif()
+
 target_include_directories(lvgl PUBLIC ${PKG_CONFIG_INC})
 target_link_libraries(lvgl PUBLIC
                           ${PKG_CONFIG_LIB}
